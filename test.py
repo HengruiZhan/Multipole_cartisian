@@ -67,16 +67,6 @@ plt.savefig("dens.png")
 # moment = multipole.Multipole(g, 3, 2*g.dr, center=center)
 # moment = multipole.Multipole(g, dens, 3, 2*g.dr, center=center)
 # with azumuthal
-"""
-for l in range(l_moments):
-    for m in range(-l, l+1):
-        moment.compute_expansion(dens, l, m)
-"""
-"""
-for l in range(l_moments):
-    moment.compute_expansion(dens, l)
-    """
-# m.compute_expansion(dens, 1, -1)
 
 # phi = g.scratch_y_plane_array()
 """
