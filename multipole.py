@@ -110,9 +110,17 @@ class Multipole():
 
         return mtilde_r, mtilde_i
 
-    def phi(self, x, y, z):
+    def phi(self, x, y, z, dx, dy=0, dz=):
         # return Phi(r), potential of one point of the field, using Eq. 20
         # x, y, z are x-, y-, z- coordinates of the point of the field
+        
+        assert dx <= self.g.dx/2 and dx >= 0
+        assert dy <= self.g.dy/2 and dy >= 0
+        assert dz <= self.g.dz/2 and dz >= 0
+
+        x -= dx
+        y -= dy
+        z -= dz
 
         radius = np.sqrt((x - self.center[0])**2 +
                          (y - self.center[1])**2 +
