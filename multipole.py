@@ -7,8 +7,7 @@ class Multipole():
         """ multipole approximation of the potential"""
 
         self.g = grid
-        self.l_moments = l_moments
-        self.dr_mp = dr
+        self.l_moments = l_moments+1
         self.center = center
 
         # compute the bins, or the radius of the concentric sphere, r_mu
