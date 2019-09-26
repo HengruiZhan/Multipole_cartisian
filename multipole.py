@@ -4,7 +4,7 @@ from scipy.special import sph_harm
 
 class Multipole():
     def __init__(self, grid, density, l_moments, dr, center=(0.0, 0.0)):
-        """ multipole approximation of the potential"""
+        # multipole approximation of the potential
 
         self.g = grid
         self.l_moments = l_moments+1
@@ -30,16 +30,16 @@ class Multipole():
         self.m_r = []
         self.m_i = []
 
-        for l in range(l_moments):
+        for l in range(self.l_moments):
             self.m_r.append([])
             self.m_i.append([])
         # for each l, there are 2l+1 values for m, -l <= m <= +l
-        for l in range(l_moments):
+        for l in range(self.l_moments):
             for m in range(2*l+1):
                 self.m_r[l].append(np.zeros(self.n_bins, dtype=np.complex128))
                 self.m_i[l].append(np.zeros(self.n_bins, dtype=np.complex128))
         # calculate the m_r and m_i for every l and m
-        for l in range(l_moments):
+        for l in range(self.l_moments):
             for m in range(-l, l+1):
                 self.compute_expansion(density, l, m)
 
@@ -109,13 +109,9 @@ class Multipole():
 
         return mtilde_r, mtilde_i
 
-    def phi(self, x, y, z, dx, dy=0, dz=):
+    def phi(self, x, y, z, dx=0, dy=0, dz=0):
         # return Phi(r), potential of one point of the field, using Eq. 20
         # x, y, z are x-, y-, z- coordinates of the point of the field
-        
-        assert dx <= self.g.dx/2 and dx >= 0
-        assert dy <= self.g.dy/2 and dy >= 0
-        assert dz <= self.g.dz/2 and dz >= 0
 
         x -= dx
         y -= dy
@@ -147,6 +143,7 @@ class Multipole():
                 phi_zone += mtilde_r * np.conj(I_lm) + np.conj(mtilde_i) * R_lm
 
         return -np.real(phi_zone)
+
 
 
 """
